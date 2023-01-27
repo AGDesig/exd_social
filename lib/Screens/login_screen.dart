@@ -130,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                               onPressed: () {
                                 Get.to(SignupScreen());
                               },
-                              child: Text("Not a User! tap to Signup here")),
+                              child: Text("Not a user")),
                         )
                       ],
                     )),
