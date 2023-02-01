@@ -1,3 +1,6 @@
+import 'package:exd_social/Screens/Shapes/practice_shapes.dart';
+import 'package:exd_social/Screens/home_bottom_tab_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -55,8 +58,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-    return GetMaterialApp(home: LoginScreen(),);
+User? user = FirebaseAuth.instance.currentUser;
+    return GetMaterialApp(home: user==null? LoginScreen():HomeBottomTabBar());
   }
 }
 

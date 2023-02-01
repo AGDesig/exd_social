@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exd_social/Models/user_model.dart';
+import 'package:exd_social/Screens/login_screen.dart';
 import 'package:exd_social/controllers/profile_screen_controller.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
@@ -61,14 +62,15 @@ User? user = FirebaseAuth.instance.currentUser;
                                 Container(
                                   margin: EdgeInsets.only(top: 20, left: 20),
                                   child: Text(
-                                      "Phone Number:",
+                                      "Phone Number:${details.metadata.phone}",
                                       style: TextStyle(fontSize: 20)),
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(top: 20, left: 20),
-                                  child: Text("Address:",
+                                  child: Text("Address:${details.metadata.address}",
                                       style: TextStyle(fontSize: 20)),
-                                )
+                                ),
+                                Container(child: IconButton(onPressed:() => showDialog(context: context, builder: (context) => SimpleDialog(title: Text("Logout"),children: [Text("are you sure you want to logout"),TextButton(onPressed: ()async{await FirebaseAuth.instance.signOut();Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));}, child: Text("Yes"))]),),icon: Icon(Icons.logout),),)
                               ]),
                         ),
                       ),
@@ -76,7 +78,7 @@ User? user = FirebaseAuth.instance.currentUser;
                         return Container(alignment: Alignment.bottomRight,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage(details.coverImageUrl),
+                                    image: NetworkImage(details.metadata.coverImageUrl),
                                     fit: BoxFit.cover)),
                             height: heightScreen * 0.3,
                             width: widthScreen,

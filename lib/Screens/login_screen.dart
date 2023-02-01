@@ -1,4 +1,3 @@
-
 import 'package:exd_social/Screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,128 +12,138 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var heightScreen = MediaQuery
-        .of(context)
-        .size
-        .height;
-    var widthScreen = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var heightScreen = MediaQuery.of(context).size.height;
+    var widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: GetBuilder<LoginController>(init: LoginController(),builder: (logic) {
-          return SafeArea(
-              child: Container(
-                width: widthScreen,
+        backgroundColor: Colors.orange.shade200,
+        body: GetBuilder<LoginController>(
+            init: LoginController(),
+            builder: (logic) {
+              return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Container(
                 height: heightScreen,
-                child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 30),
-                          alignment: Alignment.center,
-                          height: heightScreen * 0.1,
-                          width: widthScreen,
-                          child:
-                          Text("Welcome to Social App",
-                              style: TextStyle(fontSize: 40)),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 50),
-                          decoration: BoxDecoration(
-                              color: Colors.deepOrange.shade400,
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  40))),
-                          width: widthScreen * 0.9,
-                          height: heightScreen * 0.4,
-                          padding: EdgeInsets.all(30),
-                          child: Container(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                  color: Colors.blueGrey.shade200,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(60, 40))),
-                              child: Form(
-                                  key: formkey,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceEvenly,
-                                    children: [
-                                      TextFormField(
-                                          controller: emailController,
-                                          cursorColor: Colors.black,
-                                          toolbarOptions:
-                                          ToolbarOptions(
-                                              copy: true, paste: true),
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.black,
-                                                    width: 1)),
-                                            prefixIcon: Icon(
-                                              Icons.mail,
-                                              color: Colors.white,
-                                            ),
-                                            labelText: "Email",
-                                            labelStyle: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return "Enter Email";
-                                            }
-                                            return null;
-                                          },
-                                          style: TextStyle()),
-                                      TextFormField(
-                                          controller: passwordController,
-                                          toolbarOptions:
-                                          ToolbarOptions(
-                                              copy: true, paste: true),
-                                          cursorColor: Colors.black,
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.black,
-                                                    width: 1)),
-                                            prefixIcon: Icon(
-                                              Icons.mail,
-                                              color: Colors.white,
-                                            ),
-                                            labelText: "Password",
-                                            labelStyle: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            return null;
-                                          },
-                                          style: TextStyle()),
-                                    ],
-                                  ))),
-                        ),
-                        ElevatedButton(
+                width: widthScreen,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.elliptical(100, 60),
+                                bottomLeft: Radius.elliptical(100, 60),
+                                bottomRight: Radius.circular(10),
+                                topLeft: Radius.circular(10))),
+                        margin: EdgeInsets.only(top: 30),
+                        alignment: Alignment.center,
+                        height: heightScreen * 0.1,
+                        width: widthScreen * 0.9,
+                        child: Text("Welcome to Social App",
+                            style: TextStyle(fontSize: 30)),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(30),
+                                top: Radius.circular(50))),
+                        width: widthScreen * 0.8,
+                        height: heightScreen * 0.5,
+                        child: Form(
+                            key: formkey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 40),
+                                  child: TextFormField(
+                                      controller: emailController,
+                                      cursorColor: Colors.black,
+                                      toolbarOptions:
+                                          ToolbarOptions(copy: true, paste: true),
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black, width: 1)),
+                                        prefixIcon: Icon(
+                                          Icons.mail,
+                                          color: Colors.black,
+                                        ),
+                                        labelText: "Email",
+                                        labelStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Enter Email";
+                                        }
+                                        return null;
+                                      },
+                                      style: TextStyle()),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 40),
+                                  child: TextFormField(
+                                      controller: passwordController,
+                                      toolbarOptions:
+                                          ToolbarOptions(copy: true, paste: true),
+                                      cursorColor: Colors.black,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black, width: 1)),
+                                        prefixIcon: Icon(
+                                          Icons.key,
+                                          color: Colors.black,
+                                        ),
+                                        labelText: "Password",
+                                        labelStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      validator: (value) {
+                                        return null;
+                                      },
+                                      style: TextStyle()),
+                                ),
+                              ],
+                            )),
+                      ),
+                      Container(height: heightScreen *0.07,width: widthScreen *0.5,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.red)),
                           onPressed: () async {
                             if (formkey.currentState!.validate()) {
-                              logic.login(context, emailController.text, passwordController.text);
+                              logic.login(context, emailController.text,
+                                  passwordController.text);
                             }
                           },
-                          child: Text("Login"),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
-                        Container(
-                          child: TextButton(
-                              onPressed: () {
-                                Get.to(SignupScreen());
-                              },
-                              child: Text("Not a User! tap to Signup here")),
-                        )
-                      ],
-                    )),
-              ));
-        }));
+                      ),
+                      Container(
+                        child: TextButton(
+                            onPressed: () {
+                              Get.to(()=>SignupScreen());
+                            },
+                            child: Text(
+                              "Not a User! tap to Signup here",
+                              style: TextStyle(fontSize: 20),
+                            )),
+                      )
+                    ],
+                ),
+              ),
+                  ));
+            }));
   }
 }

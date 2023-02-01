@@ -30,7 +30,7 @@ class UserModel {
     createdAt = json['createdAt'].toString();
     firstName = json['firstName'];
     imageUrl = json['imageUrl'];
-    coverImageUrl = json['coverImageUrl']??"";
+    coverImageUrl = json['coverImageUrl']??"nothing to show";
     lastName = json['lastName'] ?? "";
     lat = json['lat'] ?? "";
     lastSeen = json['lastSeen'].toString();
