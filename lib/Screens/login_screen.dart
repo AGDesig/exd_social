@@ -6,12 +6,16 @@ import '../controllers/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
+  /*creating states for class LoginScreen
+  * formkey, emailController and  passwordController
+  * final is defined so after compile time the values cannot be overridden(cannot be change)*/
   final GlobalKey<FormState> formkey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    /*creating state to set heightScreen and widthScreen in UserInterface*/
     var heightScreen = MediaQuery.of(context).size.height;
     var widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -28,7 +32,8 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
+                        decoration:
+                        BoxDecoration(
                             color: Colors.grey,
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.elliptical(100, 60),
@@ -147,3 +152,4 @@ class LoginScreen extends StatelessWidget {
             }));
   }
 }
+

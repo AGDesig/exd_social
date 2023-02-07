@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 User? user = FirebaseAuth.instance.currentUser;
-    return GetMaterialApp(home: user==null? LoginScreen():HomeBottomTabBar());
+    return GetMaterialApp(debugShowCheckedModeBanner: false,home: user==null? LoginScreen():HomeBottomTabBar());
   }
 }
 
