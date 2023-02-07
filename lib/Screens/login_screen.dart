@@ -20,6 +20,7 @@ class LoginScreen extends StatelessWidget {
     var widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.orange.shade200,
+        //using Getx stateManagement to extend states and methods from LoginController class
         body: GetBuilder<LoginController>(
             init: LoginController(),
             builder: (logic) {
