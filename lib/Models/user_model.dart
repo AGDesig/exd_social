@@ -91,7 +91,7 @@ class Metadata {
   Metadata.fromJson(Map<String, dynamic> json) {
     education = json['education'];
     email = json['email'];
-    gender = json['gender']??"";
+    gender = json['gender']??"gender";
     dateOfBirth = json['dateOfBirth'];
     phone = json['phone'];
     address = json['address'];

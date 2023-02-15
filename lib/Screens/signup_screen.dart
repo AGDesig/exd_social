@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/signup_controller.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
+
+
    SignupScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+List<String> list = ["Male", "Female"];
+List<String> list2 = ["Matric", "Intermediate", "Bachelors", "Masters", "MPhil/PHD"];
+class _SignupScreenState extends State<SignupScreen> {
+/*
+  creating Objects for class SignupScreen
+  */
   TextEditingController nameController = TextEditingController();
 
   TextEditingController emailController = TextEditingController();
@@ -24,17 +37,16 @@ class SignupScreen extends StatelessWidget {
 
   bool showPassword = false;
 
+  String dropdownValue = list.first;
+  String dropdownValue2 = list2.first;
+
   GlobalKey<FormState> formkey = GlobalKey();
 
-  bool validateStructure(String value) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = RegExp(pattern);
-    return regExp.hasMatch(value);
-  }
+
 
   @override
   Widget build(BuildContext context) {
+
     var widthscreen = MediaQuery.of(context).size.width;
     var heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -64,13 +76,17 @@ class SignupScreen extends StatelessWidget {
                               if (value == null || value.isEmpty) {
                                 return "please Enter Data";
                               }
+                              else if(value.length <= 2 || value.length >=10)
+                                {
+                                  return "Please enter Name between 2 to 10 characters";
+                                }
                             },
                             controller: nameController,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.black, width: 1)),
-                                label: Text("Name"))),
+                                label: Text("User Name"))),
                         TextFormField(
                           validator: (value) => logic.validateName(value),
                           controller: emailController,
@@ -84,7 +100,7 @@ class SignupScreen extends StatelessWidget {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "please Enter Data";
-                            } else if (!validateStructure(
+                            } else if (logic.validatePassword(
                                 passwordController.text)) {
                               return "Example@1234";
                             }
@@ -97,6 +113,19 @@ class SignupScreen extends StatelessWidget {
                               label: Text("Password")),
                         ),
                         TextFormField(
+                          readOnly: true,
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1900), lastDate: DateTime(2100));
+                            if(pickedDate != null)
+                            {
+                              String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
+                              dobController.text = formattedDate;
+
+                            }
+                            else{
+                              Get.snackbar("DateTime", "Date is not selected");
+                            }
+                          },
                           controller: dobController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -104,37 +133,56 @@ class SignupScreen extends StatelessWidget {
                                       color: Colors.black, width: 1)),
                               label: Text("Date of Birth")),
                         ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Select Gender"),
+                            DropdownButton(
+
+                              items: list.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem(child: Text(value),value: value,);
+                              }).toList(),
+                              onChanged: (value) {
+                              setState(() {
+                                dropdownValue = value!;
+                                genderController.text = dropdownValue;
+                              });
+                            },
+                              value: dropdownValue,
+
+                            ),
+                          ],
+                        ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Select Education"),
+                            DropdownButton(
+
+                              items: list2.map<DropdownMenuItem<String>>((String value2) {
+                                return DropdownMenuItem(child: Text(value2),value: value2,);
+                              }).toList(),
+                              onChanged: (value2) {
+                                setState(() {
+                                  dropdownValue2 = value2!;
+                                  educationController.text = dropdownValue2;
+                                });
+                              },
+                              value: dropdownValue2,
+                            ),
+                          ],
+                        ),
                         TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "please Enter Data";
-                            }
-                          },
                           controller: genderController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black, width: 1)),
-                              label: Text("Gender")),
+                          decoration: InputDecoration(label: Text("Education")),
                         ),
                         TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "please Enter Data";
                             }
-                          },
-                          controller: educationController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black, width: 1)),
-                              label: Text("Education")),
-                        ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "please Enter Data";
-                            }
+                            else if (logic.validatePhoneNumber(phoneNumberController.text))
+                              {
+                                return "Pattern Ex 03001111111 or +923001111111";
+                              }
                           },
                           controller: phoneNumberController,
                           decoration: InputDecoration(

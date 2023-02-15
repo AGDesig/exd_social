@@ -6,7 +6,8 @@ import '../controllers/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  /*creating states for class LoginScreen
+  /*
+  creating Objects(states or instance) for class LoginScreen
   * formkey, emailController and  passwordController
   * final is defined so after compile time the values cannot be overridden(cannot be change)*/
   final GlobalKey<FormState> formkey = GlobalKey();
@@ -46,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                         height: heightScreen * 0.1,
                         width: widthScreen * 0.9,
                         child: Text("Welcome to Social App",
-                            style: TextStyle(fontSize: 30)),
+                            style: TextStyle(fontSize: 25)),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -66,8 +67,6 @@ class LoginScreen extends StatelessWidget {
                                   child: TextFormField(
                                       controller: emailController,
                                       cursorColor: Colors.black,
-                                      toolbarOptions:
-                                          ToolbarOptions(copy: true, paste: true),
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -94,8 +93,6 @@ class LoginScreen extends StatelessWidget {
                                   margin: EdgeInsets.symmetric(horizontal: 40),
                                   child: TextFormField(
                                       controller: passwordController,
-                                      toolbarOptions:
-                                          ToolbarOptions(copy: true, paste: true),
                                       cursorColor: Colors.black,
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(

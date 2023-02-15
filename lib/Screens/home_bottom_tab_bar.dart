@@ -1,12 +1,14 @@
 import 'package:exd_social/Screens/Friends/random_users_list.dart';
-import 'package:exd_social/Screens/User_chat_list_screen.dart';
 import 'package:exd_social/Screens/chats/rooms.dart';
 import 'package:exd_social/Screens/chats/users.dart';
 import 'package:exd_social/Screens/global_post_screen.dart';
 import 'package:exd_social/Screens/profile_screen.dart';
 import 'package:exd_social/controllers/home_bottom_tab_bar_Controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'login_screen.dart';
 
 class HomeBottomTabBar extends StatelessWidget {
   HomeBottomTabBar({Key? key}) : super(key: key);
@@ -88,7 +90,33 @@ class HomeBottomTabBar extends StatelessWidget {
     final HomeBottomTabBarController homeBottomTabBarController =
     Get.put(HomeBottomTabBarController(), permanent: false);
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(leading: Container(
+          child: IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => SimpleDialog(
+                  title: Text("Logout"),
+                  children: [
+                    Text(
+                        "are you sure you want to logout"),
+                    TextButton(
+                        onPressed: () async {
+                          await FirebaseAuth
+                              .instance
+                              .signOut();
+                          Navigator.of(context)
+                              .pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginScreen(),
+                              ));
+                        },
+                        child: Text("Yes"))
+                  ]),
+            ),
+            icon: Icon(Icons.logout),
+          ),
+        )),
         bottomNavigationBar: buildBottomNavigationMenu(
             context, homeBottomTabBarController),
         body: Obx(() {

@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:exd_social/Screens/login.dart';
 import 'package:exd_social/Screens/login_screen.dart';
-import 'package:exd_social/db/firebase_db.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -31,6 +28,7 @@ class FirebaseAuthentication {
         "email":data.metadata.email,
         "phone":data.metadata.phone,
         "education":data.metadata.education,
+        "gender" : data.metadata.gender,
         "dateOfBirth":data.metadata.dateOfBirth,
         "address":data.metadata.address,
         "coverImageUrl":data.metadata.coverImageUrl,
@@ -56,10 +54,10 @@ class FirebaseAuthentication {
       status = true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        final snackBar = SnackBar(content: Text("${e.code}"));
+        final snackBar = SnackBar(content: Text(e.code));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else if (e.code == 'email-already-in-use') {
-        final snackBar = SnackBar(content: Text("${e.code}"));
+        final snackBar = SnackBar(content: Text(e.code));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {

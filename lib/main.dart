@@ -1,4 +1,3 @@
-import 'package:exd_social/Screens/Shapes/practice_shapes.dart';
 import 'package:exd_social/Screens/home_bottom_tab_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

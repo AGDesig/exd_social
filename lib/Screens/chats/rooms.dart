@@ -1,4 +1,4 @@
-import 'package:exd_social/Screens/login.dart';
+import 'package:exd_social/Screens/home_bottom_tab_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class _RoomsPageState extends State<RoomsPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           fullscreenDialog: true,
-                          builder: (context) => const LoginPage(),
+                          builder: (context) =>  HomeBottomTabBar(),
                         ),
                       );
                     },

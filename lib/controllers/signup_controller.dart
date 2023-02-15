@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:intl/intl.dart';
 import '../Auth/firebase_auth.dart';
 import '../Models/user_model.dart';
 
@@ -26,15 +27,11 @@ class SignupScreenController extends GetxController
         return "Enter atleast 10 characters";
       }
   }
-  String? validatePassword(String? value) {
-    if(value == null || value.isEmpty)
-      {
-        return "please Enter Text";
-      }
-    if(value.length <= 10)
-      {
-        return "Enter atleast 10 characters";
-      }
+  bool validatePassword(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(value);
   }
   String? validateAddress(String? value) {
     if(value == null || value.isEmpty)
@@ -46,15 +43,11 @@ class SignupScreenController extends GetxController
         return "Enter atleast 10 characters";
       }
   }
-  String? validatePhoneNumber(String? value) {
-    if(value == null || value.isEmpty)
-      {
-        return "please Enter Text";
-      }
-    if(value.length <= 10)
-      {
-        return "Enter atleast 10 characters";
-      }
+  bool validatePhoneNumber(String value) {
+    String pattern =
+        r"^(?:\+92|0)[-\s]?(?:\d{3})[-\s]?\d{7}$";
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(value);
   }
 
  String? OnSignUp(
